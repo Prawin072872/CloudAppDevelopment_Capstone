@@ -183,5 +183,3 @@ def analyze_review_sentiments(review_text):
     print(sentiment_label)
 
     return sentiment_label
-
-

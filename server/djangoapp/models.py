@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.timezone import now
 
 
-
 # Car Make model
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=50)
@@ -11,8 +10,6 @@ class CarMake(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 # Car Model model
 
@@ -69,7 +66,6 @@ class CarDealer:
 
     def __str__(self):
         return self.full_name + ", " + self.state
-
 
 
 # A plain Python class to hold review data

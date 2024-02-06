@@ -10,7 +10,7 @@ from datetime import datetime
 import logging
 import json
 
-# Get an instance of a logger
+# Getting an instance of a logger
 logger = logging.getLogger(__name__)
 
 
@@ -57,6 +57,7 @@ def login_request(request):
     else:
         return render(request, 'djangoapp/login.html', context)
 
+
 # View to handle sign out request
 def logout_request(request):
     # Get the user object based on session id in request
@@ -65,6 +66,7 @@ def logout_request(request):
     logout(request)
     # Redirect user back to course list view
     return redirect('djangoapp:index')
+
 
 # View to handle sign up request
 def registration_request(request):
@@ -98,6 +100,7 @@ def registration_request(request):
         else:
             return render(request, 'djangoapp/registration.html', context)
 
+
 # View to render the reviews of a dealer
 def get_dealer_details(request, dealer_id):
     context = {}
@@ -110,6 +113,7 @@ def get_dealer_details(request, dealer_id):
         }
 
         return render(request, 'djangoapp/dealer_details.html', context)
+
 
 # View to submit a new review
 def add_review(request, dealer_id):
