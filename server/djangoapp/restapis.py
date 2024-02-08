@@ -49,25 +49,25 @@ def post_request(url, json_payload, **kwargs):
 
 
 # Gets all dealers from the Cloudant DB with the Cloud Function get-dealerships
-def get_dealers_from_cf(url):
+def get_dealers_from_cf(url, api_key, **kwargs):
     results = []
+    # Add API key to the headers
+    #headers = {'Authorization': f'Bearer {api_key}'}
+    # Call get_request with a URL parameter and headers
+    #response = requests.get(url, headers=headers)
+    # Check if the request was successful
     json_result = get_request(url)
-    # Retrieve the dealer data from the response
-    dealers = json_result["body"]["rows"]
-    # For each dealer in the response
-    for dealer in dealers:
-        # Get its data in `doc` object
-        dealer_doc = dealer["doc"]
-        # Create a CarDealer object with values in `doc` object
-        dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
-                               id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],
-                               short_name=dealer_doc["short_name"],
-                               st=dealer_doc["st"], state=dealer_doc["state"], zip=dealer_doc["zip"])
-        results.append(dealer_obj)
-
+    if json_result:
+        dealers = json_result
+        for dealer in dealers:
+            dealer_doc = dealer
+            print("DEaler",dealer_doc)
+            dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], state=dealer_doc["state"], full_name=dealer_doc["full_name"],
+                                       id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],
+                                       short_name=dealer_doc["short_name"],
+                                       st=dealer_doc["st"], zip=dealer_doc["zip"])
+            results.append(dealer_obj)
     return results
-
-
 # Gets a single dealer from the Cloudant DB with the Cloud Function get-dealerships
 # Requires the dealer_id parameter with only a single value
 def get_dealer_by_id(url, dealer_id):

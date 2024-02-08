@@ -18,15 +18,16 @@ logger = logging.getLogger(__name__)
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://9bebcb01.eu-de.apigw.appdomain.cloud/api/dealership"
-        # Get dealers from the Cloudant DB
-        context["dealerships"] = get_dealers_from_cf(url)
+        url = "https://masspraveen9-3000.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
+        # Replace 'api_key' with your actual Cloudant API key
+        api_key = 'esNNutBwLBLIqnOnI45mGN8_9gU1TntBDqQn5UUvu4Fe'
+        # Get dealerships from the Cloudant DB
+        context["dealerships"] = get_dealers_from_cf(url, api_key)
 
         # dealer_names = ' '.join([dealer.short_name for dealer in context["dealerships"]])
         # return HttpResponse(dealer_names)
 
         return render(request, 'djangoapp/index.html', context)
-
 # View to render a static about page
 def about(request):
     context = {}
