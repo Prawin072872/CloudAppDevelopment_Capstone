@@ -111,16 +111,16 @@ def get_dealer_reviews_from_cf(url, dealer_id):
 
     if json_result:
         # Get all review data from the response
-        reviews = json_result["body"]["data"]["docs"]
+        reviews = json_result["review"]
         # For every review in the response
         for review in reviews:
             # Create a DealerReview object from the data
             # These values must be present
-            review_content = review["review"]
-            id = review["_id"]
-            name = review["name"]
-            purchase = review["purchase"]
-            dealership = review["dealership"]
+            review_content = review.get("review")
+            id = review.get("_id")
+            name = review.get("name")
+            purchase = review.get("purchase")
+            dealership = review.get("dealership")
 
             try:
                 # These values may be missing
